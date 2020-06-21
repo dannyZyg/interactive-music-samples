@@ -2,7 +2,7 @@
   <div class="btn-container">
     <label>
     <button :class="['btn', player, intensity]" @click="playSound(path)">
-        <img src="../../public/play-circle-regular.svg" class="play_icon"/>
+        <img src="@/assets/play-circle-regular.svg" class="play_icon"/>
     </button>
     </label>
   </div>
