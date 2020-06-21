@@ -1,24 +1,23 @@
 <template>
   <div id="app">
-    <img width="25%" src="./assets/logo.png">
-    <HelloWorld msg="Hello Vue in CodeSandbox!" />
+    <Player msg="SELTOS SAMPLES"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import Player from './components/Player.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    HelloWorld
+    Player
   }
-};
+}
 </script>
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
