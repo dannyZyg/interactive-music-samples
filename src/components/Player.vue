@@ -12,7 +12,7 @@
         <Sound v-for="file in part.files"
           :key="file" :player="part.player"
           :intensity="part.intensity"
-          :path="file">
+          :path="'./' + part.path + '/' + file">
         </Sound>
       </div>
     </li>
@@ -29,22 +29,66 @@ export default {
         { player: 'player_1',
           intensity: 'low_intensity',
           path: 'p1_C_L',
-          files: []
+          files: [
+            "A_p1_C_L_1.mp3",
+            "A_p1_C_L_2.mp3",
+            "A_p1_C_L_3.mp3",
+            "A_p1_C_L_4.mp3",
+            "A_p1_C_L_5.mp3",
+            "A_p1_C_L_6.mp3",
+            "A_p1_C_L_7.mp3",
+            "A_p1_C_L_8.mp3",
+            "A_p1_C_L_9.mp3",
+            "A_p1_C_L_10.mp3"
+          ]
         },
         { player: 'player_1',
           intensity: 'high_intensity',
           path: 'p1_C_H',
-          files: []
+          files: [
+            "A_p1_C_H_1.mp3",
+            "A_p1_C_H_2.mp3",
+            "A_p1_C_H_3.mp3",
+            "A_p1_C_H_4.mp3",
+            "A_p1_C_H_5.mp3",
+            "A_p1_C_H_6.mp3",
+            "A_p1_C_H_7.mp3",
+            "A_p1_C_H_8.mp3",
+            "A_p1_C_H_9.mp3",
+            "A_p1_C_H_10.mp3"
+          ]
         },
         { player: 'player_2',
           intensity: 'low_intensity',
           path: 'p2_C_L',
-          files: []
+          files: [
+            "A_p2_C_L_1.mp3",
+            "A_p2_C_L_2.mp3",
+            "A_p2_C_L_3.mp3",
+            "A_p2_C_L_4.mp3",
+            "A_p2_C_L_5.mp3",
+            "A_p2_C_L_6.mp3",
+            "A_p2_C_L_7.mp3",
+            "A_p2_C_L_8.mp3",
+            "A_p2_C_L_9.mp3",
+            "A_p2_C_L_10.mp3"
+          ]
         },
         { player: 'player_2',
           intensity: 'high_intensity',
           path: 'p2_C_H',
-          files: []
+          files: [
+            "A_p2_C_H_1.mp3",
+            "A_p2_C_H_2.mp3",
+            "A_p2_C_H_3.mp3",
+            "A_p2_C_H_4.mp3",
+            "A_p2_C_H_5.mp3",
+            "A_p2_C_H_6.mp3",
+            "A_p2_C_H_7.mp3",
+            "A_p2_C_H_8.mp3",
+            "A_p2_C_H_9.mp3",
+            "A_p2_C_H_10.mp3"
+          ]
         }
       ]
     }
@@ -55,22 +99,6 @@ export default {
   },
   props: {
     msg: String
-  },
-  created() {
-    this.fetchAudioFiles('p1_C_L')
-  },
-  methods: {
-    fetchAudioFiles() {
-      const audioFiles = require.context(
-        '../../public',
-        true,
-        /^.*\.mp3/
-      )
-      const all = audioFiles.keys()
-      for (let i = 0; i < this.parts.length; i ++) {
-        this.parts[i].files = all.filter(f => f.includes(this.parts[i].path))
-      }
-    }
   }
 }
 </script>

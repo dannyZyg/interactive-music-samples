@@ -1,0 +1,66 @@
+{
+  "player1": {
+    "low-intensity": {
+      "subfolder": "p1_C_L",
+      "files": [
+        "A_p1_C_L_1.mp3",
+        "A_p1_C_L_2.mp3",
+        "A_p1_C_L_3.mp3",
+        "A_p1_C_L_4.mp3",
+        "A_p1_C_L_5.mp3",
+        "A_p1_C_L_6.mp3",
+        "A_p1_C_L_7.mp3",
+        "A_p1_C_L_8.mp3",
+        "A_p1_C_L_9.mp3",
+        "A_p1_C_L_10.mp3"
+      ]
+    },
+    "high-intensity": {
+      "subfolder": "p1_C_H",
+      "files": [
+      "A_p1_C_H_1.mp3",
+      "A_p1_C_H_2.mp3",
+      "A_p1_C_H_3.mp3",
+      "A_p1_C_H_4.mp3",
+      "A_p1_C_H_5.mp3",
+      "A_p1_C_H_6.mp3",
+      "A_p1_C_H_7.mp3",
+      "A_p1_C_H_8.mp3",
+      "A_p1_C_H_9.mp3",
+      "A_p1_C_H_10.mp3"
+      ]
+    }
+  },
+  "player2": {
+    "low-intensity": {
+      "subfolder": "p2_C_L",
+      "files": [
+        "A_p2_C_L_1.mp3",
+        "A_p2_C_L_2.mp3",
+        "A_p2_C_L_3.mp3",
+        "A_p2_C_L_4.mp3",
+        "A_p2_C_L_5.mp3",
+        "A_p2_C_L_6.mp3",
+        "A_p2_C_L_7.mp3",
+        "A_p2_C_L_8.mp3",
+        "A_p2_C_L_9.mp3",
+        "A_p2_C_L_10.mp3"
+      ]
+    },
+    "high-intensity": {
+      "subfolder": "p2_C_H",
+      "files": [
+      "A_p2_C_H_1.mp3",
+      "A_p2_C_H_2.mp3",
+      "A_p2_C_H_3.mp3",
+      "A_p2_C_H_4.mp3",
+      "A_p2_C_H_5.mp3",
+      "A_p2_C_H_6.mp3",
+      "A_p2_C_H_7.mp3",
+      "A_p2_C_H_8.mp3",
+      "A_p2_C_H_9.mp3",
+      "A_p2_C_H_10.mp3"
+      ]
+    }
+  }
+}
