@@ -17,9 +17,13 @@ export default {
     path: String
   },
   methods: {
+    init() {
+      const audio = new Audio(this.path)
+      audio.load()
+    },
     playSound (sound) {
       if(sound) {
-        var audio = new Audio(sound);
+        const audio = new Audio(this.path)
         var playPromise = audio.play();
         // In browsers that don’t yet support this functionality,
         // playPromise won’t be defined.
@@ -34,6 +38,9 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    this.init()
   }
 }
 </script>
