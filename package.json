@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "recursive-readdir": "^2.2.2",
+    "recursive-readdir": "^2.2.3",
     "vue": "^2.6.11"
   },
   "devDependencies": {
