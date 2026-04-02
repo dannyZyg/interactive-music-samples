@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="favicon.ico">
+  <title>Seltos Samples - Interactive Music Player</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    #app {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .grid-header {
+      margin: 0;
+      padding: 5px;
+      background-color: #6c8391;
+      border: solid 2px black;
+    }
+
+    .grid-header h3 {
+      margin: 0;
+    }
+
+    .sample-grid {
+      border: solid 2px black;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(5px, 1fr));
+      background-color: hsl(231, 23%, 74%);
+    }
+
+    .sample-description {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 10px;
+    }
+
+    .player-flex {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .btn-container {
+      /* No padding needed for grid layout */
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      padding: 0;
+      height: 40px;
+      width: 100%;
+      box-shadow: 0 0 5px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.1);
+      transition: background-color 150ms;
+      text-decoration: none;
+      cursor: pointer;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .btn.player_1.low_intensity {
+      background-color: hsl(169, 72%, 41%);
+    }
+
+    .btn.player_1.low_intensity:hover {
+      background-color: hsl(169, 59%, 66%);
+    }
+
+    .btn.player_1.high_intensity {
+      background-color: hsl(159, 85%, 29%);
+    }
+
+    .btn.player_1.high_intensity:hover {
+      background-color: hsl(159, 37%, 45%);
+    }
+
+    .btn.player_2.low_intensity {
+      background-color: hsl(279, 72%, 54%);
+    }
+
+    .btn.player_2.low_intensity:hover {
+      background-color: hsl(279, 46%, 61%);
+    }
+
+    .btn.player_2.high_intensity {
+      background-color: hsl(262, 83%, 45%);
+    }
+
+    .btn.player_2.high_intensity:hover {
+      background-color: hsl(262, 60%, 60%);
+    }
+
+    .play-icon {
+      width: 60%;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    // Sample data configuration
+    const parts = [
+      {
+        player: 'player_1',
+        intensity: 'low_intensity',
+        path: 'p1_C_L',
+        files: [
+          "A_p1_C_L_1.mp3",
+          "A_p1_C_L_2.mp3",
+          "A_p1_C_L_3.mp3",
+          "A_p1_C_L_4.mp3",
+          "A_p1_C_L_5.mp3",
+          "A_p1_C_L_6.mp3",
+          "A_p1_C_L_7.mp3",
+          "A_p1_C_L_8.mp3",
+          "A_p1_C_L_9.mp3",
+          "A_p1_C_L_10.mp3"
+        ]
+      },
+      {
+        player: 'player_1',
+        intensity: 'high_intensity',
+        path: 'p1_C_H',
+        files: [
+          "A_p1_C_H_1.mp3",
+          "A_p1_C_H_2.mp3",
+          "A_p1_C_H_3.mp3",
+          "A_p1_C_H_4.mp3",
+          "A_p1_C_H_5.mp3",
+          "A_p1_C_H_6.mp3",
+          "A_p1_C_H_7.mp3",
+          "A_p1_C_H_8.mp3",
+          "A_p1_C_H_9.mp3",
+          "A_p1_C_H_10.mp3"
+        ]
+      },
+      {
+        player: 'player_2',
+        intensity: 'low_intensity',
+        path: 'p2_C_L',
+        files: [
+          "A_p2_C_L_1.mp3",
+          "A_p2_C_L_2.mp3",
+          "A_p2_C_L_3.mp3",
+          "A_p2_C_L_4.mp3",
+          "A_p2_C_L_5.mp3",
+          "A_p2_C_L_6.mp3",
+          "A_p2_C_L_7.mp3",
+          "A_p2_C_L_8.mp3",
+          "A_p2_C_L_9.mp3",
+          "A_p2_C_L_10.mp3"
+        ]
+      },
+      {
+        player: 'player_2',
+        intensity: 'high_intensity',
+        path: 'p2_C_H',
+        files: [
+          "A_p2_C_H_1.mp3",
+          "A_p2_C_H_2.mp3",
+          "A_p2_C_H_3.mp3",
+          "A_p2_C_H_4.mp3",
+          "A_p2_C_H_5.mp3",
+          "A_p2_C_H_6.mp3",
+          "A_p2_C_H_7.mp3",
+          "A_p2_C_H_8.mp3",
+          "A_p2_C_H_9.mp3",
+          "A_p2_C_H_10.mp3"
+        ]
+      }
+    ];
+
+    /**
+     * Play an audio file
+     * @param {string} path - Path to the audio file
+     */
+    function playSound(path) {
+      if (!path) return;
+
+      const audio = new Audio(path);
+      const playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Playback started successfully
+          })
+          .catch((error) => {
+            console.error('Playback failed:', error);
+          });
+      }
+    }
+
+    /**
+     * Create a play button element
+     * @param {string} path - Path to audio file
+     * @param {string} player - Player identifier
+     * @param {string} intensity - Intensity level
+     * @returns {HTMLElement} Button element
+     */
+    function createPlayButton(path, player, intensity) {
+      const container = document.createElement('div');
+      container.className = 'btn-container';
+
+      const label = document.createElement('label');
+
+      const button = document.createElement('button');
+      button.className = `btn ${player} ${intensity}`;
+      button.textContent = '▶';
+      button.addEventListener('click', () => playSound(path));
+
+      label.appendChild(button);
+      container.appendChild(label);
+
+      return container;
+    }
+
+    /**
+     * Create a column for a player/intensity combination
+     * @param {Object} part - Part configuration
+     * @returns {HTMLElement} Column element
+     */
+    function createColumn(part) {
+      const column = document.createElement('div');
+
+      // Create description with player name and intensity
+      const description = document.createElement('div');
+      description.className = 'sample-description';
+
+      const playerName = part.player.replace('_', ' ').toUpperCase();
+      const intensityName = part.intensity.replace('_intensity', '').toUpperCase();
+
+      description.innerHTML = `<strong>${playerName}</strong><br>${intensityName}`;
+      column.appendChild(description);
+
+      // Create player flex container with buttons
+      const playerFlex = document.createElement('div');
+      playerFlex.className = 'player-flex';
+
+      part.files.forEach((file) => {
+        const filePath = `./${part.path}/${file}`;
+        const button = createPlayButton(filePath, part.player, part.intensity);
+        playerFlex.appendChild(button);
+      });
+
+      column.appendChild(playerFlex);
+
+      return column;
+    }
+
+    /**
+     * Render the entire application
+     */
+    function renderApp() {
+      const app = document.getElementById('app');
+
+      // Create header
+      const header = document.createElement('div');
+      header.className = 'grid-header';
+
+      const title = document.createElement('h3');
+      title.textContent = 'SELTOS SAMPLES';
+      header.appendChild(title);
+
+      app.appendChild(header);
+
+      // Create grid
+      const grid = document.createElement('div');
+      grid.className = 'sample-grid';
+
+      // Add each part as a column
+      parts.forEach((part) => {
+        const column = createColumn(part);
+        grid.appendChild(column);
+      });
+
+      app.appendChild(grid);
+    }
+
+    // Initialize the app when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderApp);
+    } else {
+      renderApp();
+    }
+  </script>
+</body>
+</html>
